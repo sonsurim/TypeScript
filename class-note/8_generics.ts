@@ -68,3 +68,24 @@ const login = logText<boolean>(true);
 
 logText('a');
 logText(10);
+
+// 인터페이스에 제네릭을 선언하는 방법
+// interface Dropdown {
+//   value: string;
+//   selected: boolean;
+// }
+
+// value에는 string만 선언할 수 있음
+// const obj: Dropdown = { value: 'abc', selected: false }
+
+interface Dropdown<T> {
+  value: T;
+  selected: boolean;
+}
+
+const obj: Dropdown<string> = { value: 'abc', selected: false };
+// interface안에 특정 타입을 추가로 정의 필요
+// value의 타입이 전달하는 타입으로 정의됨
+
+// Dropdown 인터페이스를 정의하는 데에 제네릭으로 정의를 할 때 타입을 선언하는 시점에
+// 타입을 추가적으로 넘겨서 Dropdown이라는 인터페이스의 타입을 바꿀 수 있음
