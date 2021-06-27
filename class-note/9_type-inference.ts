@@ -42,3 +42,10 @@ let detailedItem : DetailedDropdown<string> = {
   tag: 'a'
 }
 
+// Best Common Type
+// arr: number[]
+let arr1 = [0, 1, 2];
+
+// arr: (number | boolean)[]
+let arr2 = [0, 1, null];
+
