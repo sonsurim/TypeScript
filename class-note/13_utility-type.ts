@@ -7,12 +7,12 @@ interface Product {
   stock: number;
 }
 
-// 상품 목록을 받아오기 위한 API 함수 정의
+// 1. 상품 목록을 받아오기 위한 API 함수 정의
 function fetchProducts(): Promise<Product[]> {
   // code
 }
 
-// 상세 정보 조회를 위한 함수 정의
+// 2. 특정 상품의 상세 정보를 나타내기 위한 함수
 // Product 인터페이스에서 타입의 일부만 필요
 // 같은 Product 인터페이스를 사용하지만 필요한 타입이 같지 않은 경우가 있음
 
@@ -37,3 +37,26 @@ function pickDisplayProductDetail( shoppingItem: ShoppingItem) {
   // Pick<대상타입, 대상 타입에서 뽑아올 키1 | 대상 타입에서 뽑아올 키2>
   // Product에서 id, name, price 를 뽑아온 타입이 shoppingItem이 됨
 }
+
+
+// 3. 상품의 정보를 업데이트(put)하는 함수
+// AS-IS
+interface updateProduct {
+  id?: number;
+  name?: string;
+  price?: number;
+  brand?: string;
+  stock?: number;
+}
+
+function updateProductItem(productItem: updateProduct) {
+  // Product 인터페이스 중 어느것이든 업데이트 할 수 있음 (업데이트 항목은 랜덤)
+}
+// TO-BE
+type partialUpdateProduct = Partial<Product>
+// Product의 모든 속성을 옵셔널 처리
+
+function partialUpdateProductItem(productItem: Partial<Product>) {
+  // Product 인터페이스 중 어느것이든 업데이트 할 수 있음 (업데이트 항목은 랜덤)
+}
+
