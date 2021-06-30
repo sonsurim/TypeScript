@@ -60,3 +60,50 @@ function partialUpdateProductItem(productItem: Partial<Product>) {
   // Product 인터페이스 중 어느것이든 업데이트 할 수 있음 (업데이트 항목은 랜덤)
 }
 
+// 4. 유틸리티 타입 구현하기 - Partial
+interface UserProfile {
+  username: string;
+  email: string;
+  profilePhotoUrl: string;
+}
+
+// AS-IS
+// interface UserProfileUpdate {
+//   username?: string;
+//   email?: string;
+//   profilePhotoUrl?: string;
+// }
+
+// TO-BE
+// 별도의 인터페이스를 선언하지 않고 아래의 인터페이스를 구현할 수 있음 => 위의 인터페이스 재사용
+
+
+// 동작 원리 #1
+// UserProfile에 이미 속성이 정의되어 있음
+// UserProfile의 속성으로 접근하게 되면 타입이 나오게 됨
+// type UserProfileUpdate = {
+//   username?: UserProfile['username'];
+//   email?: UserProfile['email'];
+//   profilePhotoUrl?: UserProfile['profilePhotoUrl'];
+// }
+
+// 동작 원리 #2 == 맵드 타입
+// UserProfile에 있는 key(타입)에 접근해서 선언한 type의 key로 설정
+// type UserProfileUpdate = {
+  // 유니온 타입 안에 있는 속성들에 대해 한번씩 반복문을 실행
+  // 반복문이 실행될때마다 type의 key는 p (유니온 타입 안의 속성)
+  // 선언한 type의 타입(value)은 UserProfile[key]이 됨
+//   [p in 'username' | 'email' | 'profilePhotoUrl']?: UserProfile[p]
+// }
+
+// 동작 원리 #3
+// 'username' | 'email' | 'profilePhotoUrl'은 UserProfile의 keyof로 대체 가능
+// type UserProfileUpdate = {
+//   [p in keyof UserProfile]?: UserProfile[p]
+// }
+
+// 동작 원리 #4
+// UserProfile 타입에 국한되지 않게 타입을 넘겨받을 수 있는 형태인 제네릭을 사용
+type Subset<T> = {
+  [p in keyof T]?: T[p]
+}
