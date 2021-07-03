@@ -39,9 +39,6 @@ let isDeathLoading = false;
 let isRecoveredLoading = false;
 
 // api
-/**
- * @returns {Promise<T>}
- */
 
 function fetchCovidSummary() {
   const url = 'https://api.covid19api.com/summary';
