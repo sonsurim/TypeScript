@@ -14,13 +14,27 @@
    - [x] `tsc` 명령어로 타입스크립트 컴파일
 
 2. 명시적인 `any` 선언하기
+   - 프로젝트 테스트 코드가 통과하는지 확인
    - `tsconfig.json` 파일에 `noImplicitAny` 값을 `true`로 추가
-   - 가능한한 구체적인 타입으로 타입 정의
+   - 가능한 타입을 적용할 수 있는 모든 곳에 타입 적용
+     - 라이브러리 사용하는 경우, `DefinitelyTyped`에서 `@types`관련 라이브러리를 찾아 설치
+     - 타입 정하기 어려운 곳은 명시적으로 `any` 선언
+   - 테스트 코드가 통과하는지 확인
 
 3. 프로젝트 환경 구성
    - babel, eslint, prettier 등의 환경 설정
 
 4. 외부 라이브러리 모듈화
+
+5. `strict` 옵션 추가 후 타입 정의
+```
+{
+   "strict": true,
+   "strictNullChecks": true,
+   "strictFunctionTypes": true,
+   "strictBindCallApply": true
+}
+```
 
 ## 참고 자료
 
