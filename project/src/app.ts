@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { Chart } from 'chart.js';
 // 타입 모듈
-import { CovidSummaryResponse } from './covid/index'
+import { CountrySummaryResponse, CovidSummaryResponse } from './covid/index'
 
 // utils
 function $(selector: string) {
@@ -54,20 +54,20 @@ enum CovidStatus {
   Deaths = 'deaths',
 }
 
-function fetchCountryInfo(countryCode: string, status: CovidStatus) {
+function fetchCountryInfo(countryCode: string, status: CovidStatus): Promise<AxiosResponse<CountrySummaryResponse>> {
   // status params: confirmed, recovered, deaths
   const url = `https://api.covid19api.com/country/${countryCode}/status/${status}`;
   return axios.get(url);
 }
 
 // methods
-function startApp() {
+function startApp(): void {
   setupData();
   initEvents();
 }
 
 // events
-function initEvents() {
+function initEvents(): void {
   rankList.addEventListener('click', handleListClick);
 }
 
